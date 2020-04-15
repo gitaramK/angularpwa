@@ -57,7 +57,7 @@ export class AppComponent {
     // Stash the event so it can be triggered later.
     this.deferredPrompt = e;
     this.showButton = true;
-    this.addToHomeScreen();
+    //this.addToHomeScreen();
   }
   addToHomeScreen() {
     // hide our user interface that shows our A2HS button
