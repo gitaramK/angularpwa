@@ -3,6 +3,7 @@ import {MatTableModule} from '@angular/material/table'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field'
 
 //import { MatPaginatorModule, MatToolbarModule } from '@angular/material';
 
@@ -11,14 +12,16 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatTableModule,
         MatToolbarModule,
         MatButtonModule,
-        MatDialogModule
+        MatDialogModule,
+        MatFormFieldModule
         
     ],
     exports: [
         MatTableModule,
         MatToolbarModule,
         MatButtonModule,
-        MatDialogModule
+        MatDialogModule,
+        MatFormFieldModule
       
     ],
     

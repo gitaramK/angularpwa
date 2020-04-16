@@ -7,10 +7,14 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { DetailsListComponent } from './details-list/details-list.component';
+import { ShowListComponent } from './show-list/show-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DetailsListComponent,
+    ShowListComponent
   ],
   imports: [
     BrowserModule,

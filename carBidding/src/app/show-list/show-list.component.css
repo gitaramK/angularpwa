@@ -1,0 +1,8 @@
+table,.homeButton{
+    width: 50%;
+    margin: auto;
+  }
+
+  .example-spacer {
+  flex: 1 1 auto;
+}
