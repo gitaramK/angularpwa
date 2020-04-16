@@ -1,14 +1,10 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+import { RestApiService } from '../rest-api.service';
 
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-export interface PeriodicElement {
+export interface TableElement {
   title: string;
   image: string;
   reservePrice: string;
@@ -20,10 +16,10 @@ export interface PeriodicElement {
 }
 
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { title: 'fsdfds', image: 'Black', reservePrice: '15000',currentBid:'500',currentBidder:'Amol',auctionId:'12',bidExpiry:'12' },
-  { title: 'sdfsd', image: 'Black', reservePrice: '16000',currentBid:'600',currentBidder:'Sery Meral',auctionId:'14',bidExpiry:'14' },
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   { title: 'fsdfds', image: 'Black', reservePrice: '15000',currentBid:'500',currentBidder:'Amol',auctionId:'12',bidExpiry:'12' },
+//   { title: 'sdfsd', image: 'Black', reservePrice: '16000',currentBid:'600',currentBidder:'Sery Meral',auctionId:'14',bidExpiry:'14' },
+// ];
 
 @Component({
   selector: 'app-show-list',
@@ -36,28 +32,27 @@ export class ShowListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  Data: TableElement[];
   displayedColumns: string[] = ['Title', 'Image', 'Reserve Price', 'Current bid','Current bidder','Auction ID','Bid Expiry'];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource<TableElement>(this.Data);
+  //dataSource = ELEMENT_DATA;
 
   animal: string;
   name: string;
-  constructor(public dialog: MatDialog,public router:Router) { }
+
+  
+
+  constructor(private restApiService: RestApiService,public router:Router) {
+    this.restApiService.getCarDetails().subscribe((res) => {
+      this.dataSource = new MatTableDataSource<TableElement>(res);
+      
+    })
+  }
 
   public gotoDetailList() {
     this.router.navigate(['detail-list']);
   }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
+ 
   /***Add to home screen button */
   deferredPrompt: any;
   showButton = false;
@@ -88,20 +83,4 @@ export class ShowListComponent implements OnInit {
       });
 
   }
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: '../dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

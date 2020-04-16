@@ -1,6 +1,6 @@
 <div class="container">
-    <button mat-raised-button>Back</button>
-    <form >
+    <button mat-raised-button (click)="back()">Back</button>
+    
       <div class="row">
         <div class="col-25">
           <label for="fname">Title</label>
@@ -36,7 +36,7 @@
 
         </div>
         <div class="col-17">
-            <button mat-raised-button color="primary" >Manual</button>
+            <button mat-raised-button color="primary" (click)="openDialog()">Manual</button>
 
         </div>
       </div>
@@ -97,5 +97,5 @@
         </div>
         
       </div>
-    </form>
+   
   </div>
