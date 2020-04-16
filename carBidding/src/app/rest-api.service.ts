@@ -17,7 +17,7 @@ export interface element {
   providedIn: 'root'
 })
 export class RestApiService {
-  api: string = "http://demo2383658.mockable.io/getCars";
+  api: string = "https://demo2383658.mockable.io/getCars";
 
   constructor(private http: HttpClient) { }
 
