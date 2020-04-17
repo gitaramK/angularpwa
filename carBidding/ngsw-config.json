@@ -19,7 +19,7 @@
       "https://demo2383658.mockable.io/getCars",
       "https://demo2383658.mockable.io/updateBid"
     ],
-    "cacheConfig": {
+    "cacheConfig": { 
       "strategy": "freshness",
       "maxSize": 100,
       "maxAge": "3d",
@@ -27,6 +27,8 @@
     }
   }
 ],
+
+
 
   "assetGroups": [
     {
