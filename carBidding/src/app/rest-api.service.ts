@@ -13,15 +13,26 @@ export interface element {
 
 }
 
+export interface updateElement {
+  value: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
   api: string = "https://demo2383658.mockable.io/getCars";
+  updateBidAPI: string = "https://demo2383658.mockable.io/updateBid";
 
   constructor(private http: HttpClient) { }
 
   getCarDetails(): Observable<element[]> {
     return this.http.get<element[]>(this.api)
   }
+  updateBid(value): Observable<updateElement[]> {
+    return this.http.post<updateElement[]>(this.updateBidAPI,value);
+  }
+
+
+  
 }

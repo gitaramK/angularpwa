@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ShareDataService } from '../share-data.service';
+import { RestApiService } from '../rest-api.service';
 
 
 
@@ -21,7 +22,7 @@ export class DetailsListComponent implements OnInit {
   showPopup:Boolean= false;
   
   data:any;
-  constructor(public dialog: MatDialog,public router:Router,public sharingService:ShareDataService) { }
+  constructor(public dialog: MatDialog,public router:Router,public sharingService:ShareDataService,public restApiService:RestApiService) { }
 
   ngOnInit(): void {
     this.data = this.sharingService.getData();
@@ -38,6 +39,10 @@ export class DetailsListComponent implements OnInit {
     this.showPopup = false;
     if(isFromOk){
       console.log('value++',value);
+      this.restApiService.updateBid(value).subscribe((res) => {
+        
+        
+      })
     }
   }
   
