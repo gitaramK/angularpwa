@@ -7,7 +7,8 @@
         </div>
     
         <div class="col-25">
-          <input type="text" id="fname" name="Title" placeholder="Title">
+            <label>{{data.title}}</label>
+          <!-- <input type="text" id="fname" name="Title" placeholder="Title"> -->
         </div>
       </div>
       <div class="row">
@@ -15,7 +16,7 @@
           <label for="lname">Image</label>
         </div>
         <div class="col-25">
-          <img src="">
+          <label>{{data.image}}</label>
         </div>
       </div>
       <div class="row">
@@ -23,7 +24,7 @@
           <label for="lname">Bid expiry</label>
         </div>
         <div class="col-25">
-          <input type="text" id="lname" name="Bid expiry" placeholder="Bid expiry">
+          <label>{{data.bidExpiry}}</label>
         </div>
       </div>
       <div class="row">
@@ -46,7 +47,7 @@
           <label for="lname">Auction ID</label>
         </div>
         <div class="col-25">
-            <input type="text" id="lname" name="Auction ID" placeholder="Auction ID">
+          <label>{{data.auctionId}}</label>
         </div>
         
       </div>
@@ -56,7 +57,7 @@
           <label for="lname">Reserve Price </label>
         </div>
         <div class="col-25">
-            <input type="text" id="lname" name="Reserve Price" placeholder="Reserve Price">
+          <label>{{data.reservePrice}}</label>
         </div>
         
       </div>
@@ -65,7 +66,7 @@
           <label for="lname">Current Bid</label>
         </div>
         <div class="col-25">
-            <input type="text" id="lname" name="Current Bid" placeholder="Current Bid">
+          <label>{{data.currentBid}}</label>
         </div>
         
       </div>
@@ -99,3 +100,17 @@
       </div>
    
   </div>
+
+  <!-- The Modal -->
+<div id="myModal" class="modal" *ngIf="showPopup">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="closePopup(false,data.bidValue)">&times;</span>
+    <label for="lname">Enter the Bid Value </label>
+    <input type="text" id="lname" name="Bid Value" placeholder="Bid Value" [(ngModel)]="data.bidValue">
+
+    <button mat-raised-button color="primary" (click)="closePopup(true,data.bidValue)">OK</button>
+  </div>
+
+</div>

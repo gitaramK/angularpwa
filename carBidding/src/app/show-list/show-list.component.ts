@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { RestApiService } from '../rest-api.service';
+import { ShareDataService } from '../share-data.service';
 
 
 export interface TableElement {
@@ -42,14 +43,16 @@ export class ShowListComponent implements OnInit {
 
   
 
-  constructor(private restApiService: RestApiService,public router:Router) {
+  constructor(private restApiService: RestApiService,public router:Router,public sharingService:ShareDataService) {
     this.restApiService.getCarDetails().subscribe((res) => {
       this.dataSource = new MatTableDataSource<TableElement>(res);
       
     })
   }
 
-  public gotoDetailList() {
+  public gotoDetailList(row,event) {
+    
+    this.sharingService.setData(row);
     this.router.navigate(['detail-list']);
   }
  

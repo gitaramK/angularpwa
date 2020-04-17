@@ -1,12 +1,13 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ShareDataService } from '../share-data.service';
+
 
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  bidValue: string;
+  
 }
 
 @Component({
@@ -16,43 +17,30 @@ export interface DialogData {
 })
 export class DetailsListComponent implements OnInit {
 
-  animal: string;
-  name: string;
-  constructor(public dialog: MatDialog,public router:Router) { }
+  bidValue: string;
+  showPopup:Boolean= false;
+  
+  data:any;
+  constructor(public dialog: MatDialog,public router:Router,public sharingService:ShareDataService) { }
 
   ngOnInit(): void {
+    this.data = this.sharingService.getData();
+    console.log(this.data);
   }
   public back() {
     this.router.navigate(['show-list']);
   }
   
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: { name: this.name, animal: this.animal }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+  openDialog():void{
+    this.showPopup = true;
   }
+  closePopup(isFromOk:boolean,value:string):void{
+    this.showPopup = false;
+    if(isFromOk){
+      console.log('value++',value);
+    }
+  }
+  
 
 }
 
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: '../dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}

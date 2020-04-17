@@ -10,6 +10,7 @@ import { MaterialModule } from './material.module';
 import { DetailsListComponent } from './details-list/details-list.component';
 import { ShowListComponent } from './show-list/show-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
    
     

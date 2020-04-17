@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import {MatTableModule} from '@angular/material/table'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field'
         MatFormFieldModule
       
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
     
 })
 

@@ -52,7 +52,7 @@
    
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr (click)="gotoDetailList()" mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    <tr class="rowUI" (click)="gotoDetailList(row,$event)" mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
   </table>
   
   
