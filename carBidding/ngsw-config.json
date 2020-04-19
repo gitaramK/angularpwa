@@ -20,15 +20,13 @@
       "https://demo2383658.mockable.io/updateBid"
     ],
     "cacheConfig": { 
-      "strategy": "performance",
+      "strategy": "freshness",
       "maxSize": 100,
       "maxAge": "3d",
       "timeout": "10s"
     }
   }
 ],
-
-
 
   "assetGroups": [
     {
@@ -54,29 +52,5 @@
         ]
       }
     }
-  ],
-  "static.ignore": [
-    "^\/assets\/ignore.*$"
-  ],
-  "routing": {
-    "index": "/index.html",
-    "routes": {
-      "/": {
-        "match": "exact"
-      },
-      "/some-routes-group-prefix": {
-        "match": "prefix"
-      },
-      "/some-routes-group-prefix-no-files": {
-        "match": "prefix",
-        "onlyWithoutExtension": true
-      },
-      "/some/specific-route": {
-        "match": "exact"
-      },
-      "^/regex/.*/route$": {
-        "match": "regex"
-      }
-    }
-  } 
+  ]
 }
