@@ -45,9 +45,9 @@ function sendNewsletter(req, res) {
 
     const notificationPayload = {
         "notification": {
-            "title": "Angular News",
-            "body": "Newsletter Available!",
-            "icon": "assets/main-page-logo-small-hat.png",
+            "title": "Tata ",
+            "body": "Tata Nexon Electric launch!",
+            "icon": "assets/TaTa_N.jpg",
             "vibrate": [100, 50, 100],
             "data": {
                 "dateOfArrival": Date.now(),
