@@ -35,9 +35,10 @@ webpush.setVapidDetails(
 app.route('/api/newsletter').post(sendNewsletter);
 app.route('/api/notifications').post(addPushSubscriber);
 
+const allSubscriptions = []
 function sendNewsletter(req, res) {
 
-    const allSubscriptions = [] //... get subscriptions from database 
+     //... get subscriptions from database 
 
     console.log('Total subscriptions', allSubscriptions.length);
 
@@ -67,17 +68,18 @@ function sendNewsletter(req, res) {
         });
 }
 
-
+let USER_SUBSCRIPTIONS = [];
 function addPushSubscriber(req, res) {
 
     const sub = req.body;
-    let USER_SUBSCRIPTIONS = [];
+   
     console.log('Received Subscription on the server: ', sub);
 
     USER_SUBSCRIPTIONS.push(sub);
 
     res.status(200).json({ message: "Subscription added successfully." });
 }
+
 app.set('port', process.env.PORT || 8080);
 const server = app.listen(app.get('port'), () => {
     console.log(`Express running → PORT ${server.address().port}`);
