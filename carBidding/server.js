@@ -76,7 +76,7 @@ function addPushSubscriber(req, res) {
    
     allSubscriptions.push(sub);
 
-    res.status(200).json({ message: "Subscription added successfully." });
+    res.status(200).json({ message: "Subscription added successfully.",allSubscriptions:allSubscriptions });
 }
 
 app.set('port', process.env.PORT || 8080);
