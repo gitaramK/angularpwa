@@ -31,15 +31,13 @@ webpush.setVapidDetails(
 );
 
 
-
+/***** */
 app.route('/api/newsletter').post(sendNewsletter);
 app.route('/api/notifications').post(addPushSubscriber);
 
 const allSubscriptions = []
-//let USER_SUBSCRIPTIONS = [];
-function sendNewsletter(req, res) {
 
-     //... get subscriptions from database 
+function sendNewsletter(req, res) {
 
     console.log('Total subscriptions', allSubscriptions.length);
 
