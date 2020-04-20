@@ -33,6 +33,14 @@ export class RestApiService {
     return this.http.post<updateElement[]>(this.updateBidAPI,value);
   }
 
+  addPushSubscriber(sub:any) {
+    return this.http.post('/api/notifications', sub);
+}
+
+   send() {
+    return this.http.post('/api/newsletter', null);
+   }
+
 
   
 }

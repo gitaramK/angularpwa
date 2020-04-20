@@ -4,8 +4,8 @@
   "dataGroups": [{
     "name": "api-performance",
     "urls": [
-      "/assets/i18n/**",
-      "/api/**"
+      "/assets/i18n/**"
+     
     ],
     "cacheConfig": {
       "strategy": "performance",
@@ -17,13 +17,15 @@
     "name": "api-freshness",
     "urls": [
       "https://demo2383658.mockable.io/getCars",
-      "https://demo2383658.mockable.io/updateBid"
+      "https://demo2383658.mockable.io/updateBid",
+      "/api/newsletter",
+      "/api/notifications"
     ],
     "cacheConfig": { 
       "strategy": "freshness",
       "maxSize": 100,
       "maxAge": "3d",
-      "timeout": "10s"
+      "timeout": "5s"
     }
   }
 ],
