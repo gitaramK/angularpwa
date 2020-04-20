@@ -36,6 +36,7 @@ app.route('/api/newsletter').post(sendNewsletter);
 app.route('/api/notifications').post(addPushSubscriber);
 
 const allSubscriptions = []
+//let USER_SUBSCRIPTIONS = [];
 function sendNewsletter(req, res) {
 
      //... get subscriptions from database 
@@ -68,14 +69,14 @@ function sendNewsletter(req, res) {
         });
 }
 
-let USER_SUBSCRIPTIONS = [];
+
 function addPushSubscriber(req, res) {
 
     const sub = req.body;
    
     console.log('Received Subscription on the server: ', sub);
 
-    USER_SUBSCRIPTIONS.push(sub);
+    allSubscriptions.push(sub);
 
     res.status(200).json({ message: "Subscription added successfully." });
 }
