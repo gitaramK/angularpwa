@@ -23,11 +23,12 @@ app.use(bodyParser.json());
 
 // Start the app by listening on the default Heroku port
 // app.listen(process.env.PORT || 8080);
- webpush.setVapidDetails(
-     'gitaram.kanawade@fulcrumdigital.com',
-     vapidKeys.publicKey,
-     vapidKeys.privateKey
- );
+
+// webpush.setVapidDetails(
+//     'gitaram.kanawade@fulcrumdigital.com',
+//     vapidKeys.publicKey,
+//     vapidKeys.privateKey
+// );
 
 
 
