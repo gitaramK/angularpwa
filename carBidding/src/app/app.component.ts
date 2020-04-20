@@ -15,7 +15,7 @@ export class AppComponent {
   showSnackBaGreen:Boolean=false;
   readonly VAPID_PUBLIC_KEY = "BLzVD3cpcRqBYbujq25JR_J5EbHkL_7PM_BHN7AlqOomchns1Oq5gyO0875hCnNw1fQ-cLSXoGZQqFoz9WtOMZs";
 
-
+  isEnabled = this.swPush.isEnabled;
   constructor(private readonly onlineOfflineService: OnlineOfflineService,private swPush: SwPush,private _restAPI:RestApiService) {
     this.registerToEvents(onlineOfflineService);
     this.subscribeToNotifications();
