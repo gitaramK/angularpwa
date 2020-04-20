@@ -48,6 +48,16 @@ export class ShowListComponent implements OnInit {
       this.dataSource = new MatTableDataSource<TableElement>(res);
       
     })
+    // Checks if should display install popup notification:
+
+  // let isIos;
+  // let isInStandaloneMode;
+  // const userAgent = window.navigator.userAgent.toLowerCase();
+  // isIos =  /iphone|ipad|ipod/.test( userAgent );
+  // isInStandaloneMode = 'standalone' in window.navigator;
+
+  //  if(isIos && isInStandaloneMode)
+    
   }
 
   public gotoDetailList(row,event) {
@@ -86,4 +96,8 @@ export class ShowListComponent implements OnInit {
       });
 
   }
+
+
+
 }
+

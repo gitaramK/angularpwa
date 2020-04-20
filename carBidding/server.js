@@ -24,11 +24,11 @@ app.use(bodyParser.json());
 // Start the app by listening on the default Heroku port
 // app.listen(process.env.PORT || 8080);
 
-// webpush.setVapidDetails(
-//     'gitaram.kanawade@fulcrumdigital.com',
-//     vapidKeys.publicKey,
-//     vapidKeys.privateKey
-// );
+webpush.setVapidDetails(
+    'mailto:gitaram.kanawade@fulcrumdigital.com',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+);
 
 
 
@@ -78,7 +78,7 @@ function addPushSubscriber(req, res) {
 
     res.status(200).json({ message: "Subscription added successfully." });
 }
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8081);
 const server = app.listen(app.get('port'), () => {
     console.log(`Express running → PORT ${server.address().port}`);
   });
