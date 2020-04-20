@@ -78,7 +78,7 @@ function addPushSubscriber(req, res) {
 
     res.status(200).json({ message: "Subscription added successfully." });
 }
-app.set('port', process.env.PORT || 8081);
+app.set('port', process.env.PORT || 8080);
 const server = app.listen(app.get('port'), () => {
     console.log(`Express running → PORT ${server.address().port}`);
   });
