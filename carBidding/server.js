@@ -61,7 +61,7 @@ function sendNewsletter(req, res) {
 
     Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
         sub, JSON.stringify(notificationPayload))))
-        .then(() => res.status(200).json({ message: 'Newsletter sent successfully.' }))
+        .then(() => res.status(200).json({ message: 'Newsletter sent successfully.',allSubscriptions:allSubscriptions }))
         .catch(err => {
             console.error("Error sending notification, reason: ", err);
             res.sendStatus(500);
