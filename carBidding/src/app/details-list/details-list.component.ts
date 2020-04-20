@@ -29,7 +29,7 @@ export class DetailsListComponent implements OnInit {
     console.log(this.data);
   }
   public back() {
-    this.router.navigate(['show-list']);
+    this.router.navigate(['']);
   }
   
   openDialog():void{
