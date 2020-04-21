@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ShareDataService } from '../share-data.service';
 import { RestApiService } from '../rest-api.service';
+import { OnlineOfflineService } from '../online-offline.service';
 
 
 
@@ -20,9 +21,12 @@ export class DetailsListComponent implements OnInit {
 
   bidValue: string;
   showPopup:Boolean= false;
-  
   data:any;
-  constructor(public dialog: MatDialog,public router:Router,public sharingService:ShareDataService,public restApiService:RestApiService) { }
+  online: boolean;
+  constructor(public dialog: MatDialog,public router:Router,public sharingService:ShareDataService,
+    public restApiService:RestApiService,private readonly onlineOfflineService: OnlineOfflineService) {
+    this.registerToEvents(onlineOfflineService);
+   }
 
   ngOnInit(): void {
     this.data = this.sharingService.getData();
@@ -38,12 +42,32 @@ export class DetailsListComponent implements OnInit {
   closePopup(isFromOk:boolean,value:string):void{
     this.showPopup = false;
     if(isFromOk){
-      console.log('value++',value);
+    
       this.restApiService.updateBid(value).subscribe((res) => {
-        
-        
-      })
+            console.log('res++',res);
+         })
+        if(!this.online){
+        localStorage.setItem('bidValue', value);
+       }
     }
+  }
+
+  private registerToEvents(onlineOfflineService: OnlineOfflineService) {
+    onlineOfflineService.connectionChanged.subscribe(online => {
+      this.online = online;
+      
+      if (online) {
+        console.log('Connected');
+        if(localStorage.getItem('bidValue')){
+        this.restApiService.updateBid(localStorage.getItem('bidValue')).subscribe((res) => {
+          localStorage.removeItem('bidValue');
+        })
+      }
+  
+      } else {
+        localStorage.removeItem('bidValue');
+      }
+    });
   }
   
 
