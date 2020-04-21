@@ -71,27 +71,24 @@ function sendNewsletter(req, res) {
         });
 }
 
-function addWelcomePushSubscriber() {
+function addWelcomePushSubscriber(sub) {
  
 
     const notificationPayload = {
         "notification": {
-            "title": "Nice Job!Notifications are on now ",
+            "title": "Nice Job!Notifications are on now for CarBidding ",
             "body": "Change this at any time from you browser notification permissions setting",
             "vibrate": [100, 50, 100],
             "data": {
                 "dateOfArrival": Date.now(),
                 "primaryKey": 1
             },
-            "actions": [{
-                "action": "explore",
-                "title": "Go to the site"
-            }]
+           
         }
     };
 
-    Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
-        sub, JSON.stringify(notificationPayload))))
+    Promise.all(webpush.sendNotification(
+        sub, JSON.stringify(notificationPayload)))
         .then(() => console.log('sent'))
         .catch(err => {
             console.error("Error sending notification, reason: ", err);
@@ -104,7 +101,7 @@ function addPushSubscriber(req, res) {
     const sub = req.body;
    
     allSubscriptions.push(sub);    
-    addWelcomePushSubscriber();  
+    addWelcomePushSubscriber(sub);  
     res.status(200).json({ message: "Subscription added successfully.",allSubscriptions:allSubscriptions });
 }
 
