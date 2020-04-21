@@ -26,7 +26,7 @@ webpush.setVapidDetails(
 /****APIS for notifications* */
 app.route('/api/newsletter').post(sendNewsletter);
 app.route('/api/notifications').post(addPushSubscriber);
-app.route('/api/getcar').post(getCars);
+app.route('/api/getcar').get(getCars);
 app.route('/api/updateBid').post(updateBid);
 
 const allSubscriptions = [];
