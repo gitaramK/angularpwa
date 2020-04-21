@@ -43,13 +43,24 @@ function sendNewsletter(req, res) {
                 "dateOfArrival": Date.now(),
                 "primaryKey": 1
             },
-            "actions": [{
-                "action": "<a href='https://www.cartradeexchange.com/'></a>",
-                "title": "Go to the site"
-            }]
+            "actions": [
+            {action: 'like', title: '👍Like'},  
+            {action: 'view', title: 'visit'}]
         }
     };
-
+    webpush.addEventListener('notificationclick', function(event) {  
+        var messageId = event.notification.data;
+      
+        event.notification.close();  
+      
+        if (event.action === 'like') {  
+          //silentlyLikeItem();  
+        }  
+        else if (event.action === 'view') {  
+          clients.openWindow("https://droom.in/buyer-central/guide-auction");  
+        }  
+       
+      }, false);
     Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
         sub, JSON.stringify(notificationPayload))))
         .then(() => res.status(200).json({ message: 'Newsletter sent successfully.', allSubscriptions: allSubscriptions }))
