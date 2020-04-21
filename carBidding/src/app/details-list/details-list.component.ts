@@ -41,7 +41,7 @@ export class DetailsListComponent implements OnInit {
   }
   closePopup(isFromOk:boolean,value:string):void{
     this.showPopup = false;
-    this.data.value=value;
+    this.data.updatedBid=value;
     if(isFromOk){
     
       this.restApiService.updateBid(this.data).subscribe((res) => {
