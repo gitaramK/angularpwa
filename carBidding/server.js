@@ -44,7 +44,7 @@ function sendNewsletter(req, res) {
                 "primaryKey": 1
             },
             "actions": [{
-                "action": "explore",
+                "action": "<a href='https://www.cartradeexchange.com/'></a>",
                 "title": "Go to the site"
             }]
         }
@@ -100,7 +100,7 @@ function getCars(req, res) {
     
 }
 
-/*****Update Bid Valie */
+/*****Update Bid Value into json file */
 function updateBid(req, res) {
     var obj;
     const request = req.body;
@@ -108,7 +108,7 @@ function updateBid(req, res) {
         if (err) throw err;
         obj = JSON.parse(data);
         obj.forEach((x,index) => {
-            // If the bookID is the one we are looking for, set it as null
+           
             if (x.carId === request.carId) {
                 obj[index].updatedBid = request.updatedBid;
                 fs.writeFile('car.json',JSON.stringify(obj), function (err, data) {
