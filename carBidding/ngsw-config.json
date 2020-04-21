@@ -17,7 +17,6 @@
     "name": "api-freshness",
     "urls": [
       "/api/getcar",
-      "/api/updateBid",
       "/api/newsletter",
       "/api/notifications"
     ],
