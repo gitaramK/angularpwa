@@ -76,7 +76,7 @@ function addWelcomePushSubscriber(sub) {
 
     const notificationPayload = {
         "notification": {
-            "title": "Nice Job!Notifications are on now for CarBidding ",
+            "title": "Nice Job! Notifications are on now for CarBidding ",
             "body": "Change this at any time from you browser notification permissions setting",
             "vibrate": [100, 50, 100],
             "data": {
