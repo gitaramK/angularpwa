@@ -1,3 +1,8 @@
+/***
+ * Author : Gitaram Kanawade
+ * Date : 21/04/2020
+ * Description:Call all rest APIS
+ */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
@@ -10,12 +15,9 @@ export interface element {
   currentBidder: string;
   auctionId: string;
   bidExpiry: string;
-
+  
 }
 
-export interface updateElement {
-  value: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +29,11 @@ export class RestApiService {
   getCarDetails(): Observable<element[]> {
     return this.http.get<element[]>('/api/getcar');
   }
-  updateBid(data): Observable<updateElement[]> {
-    return this.http.post<updateElement[]>('/api/updateBid',data);
+  
+  updateBid(sub:any) {
+    return this.http.post('/api/updateBid', sub);
   }
-
+   
   addPushSubscriber(sub:any) {
     return this.http.post('/api/notifications', sub);
 }

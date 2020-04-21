@@ -1,3 +1,9 @@
+/***
+ * Author : Gitaram Kanawade
+ * Date : 21/04/2020
+ * Description:This files contains Rest APIS and heroku deployment configurtions
+ */
+
 const express = require('express');
 const path = require('path');
 const webpush = require('web-push');//Requires for push notifications
