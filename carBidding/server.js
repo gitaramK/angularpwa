@@ -35,7 +35,11 @@ webpush.setVapidDetails(
 app.route('/api/newsletter').post(sendNewsletter);
 app.route('/api/notifications').post(addPushSubscriber);
 
-const allSubscriptions = []
+
+
+const allSubscriptions = [];
+
+
 
 function sendNewsletter(req, res) {
 
@@ -67,15 +71,40 @@ function sendNewsletter(req, res) {
         });
 }
 
+function addWelcomePushSubscriber() {
+ 
+
+    const notificationPayload = {
+        "notification": {
+            "title": "Nice Job!Notifications are on now ",
+            "body": "Change this at any time from you browser notification permissions setting",
+            "vibrate": [100, 50, 100],
+            "data": {
+                "dateOfArrival": Date.now(),
+                "primaryKey": 1
+            },
+            "actions": [{
+                "action": "explore",
+                "title": "Go to the site"
+            }]
+        }
+    };
+
+    Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
+        sub, JSON.stringify(notificationPayload))))
+        .then(() => console.log('sent'))
+        .catch(err => {
+            console.error("Error sending notification, reason: ", err);
+           
+        });
+}
 
 function addPushSubscriber(req, res) {
 
     const sub = req.body;
    
-    console.log('Received Subscription on the server: ', sub);
-   
-    allSubscriptions.push(sub);
-
+    allSubscriptions.push(sub);    
+    addWelcomePushSubscriber();  
     res.status(200).json({ message: "Subscription added successfully.",allSubscriptions:allSubscriptions });
 }
 
