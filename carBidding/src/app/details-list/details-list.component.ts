@@ -48,7 +48,7 @@ export class DetailsListComponent implements OnInit {
             
          })
         if(!this.online){
-        localStorage.setItem('bidValue', this.data);
+        localStorage.setItem('bidValue', JSON.stringify(this.data));
        }
     }
   }
@@ -60,7 +60,7 @@ export class DetailsListComponent implements OnInit {
       if (online) {
         
         if(localStorage.getItem('bidValue')){
-        this.restApiService.updateBid(localStorage.getItem('bidValue')).subscribe((res) => {
+        this.restApiService.updateBid(JSON.parse(localStorage.getItem('bidValue'))).subscribe((res) => {
           localStorage.removeItem('bidValue');
         })
       }
