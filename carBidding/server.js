@@ -48,19 +48,7 @@ function sendNewsletter(req, res) {
             {action: 'view', title: 'visit'}]
         }
     };
-    webpush.addEventListener('notificationclick', function(event) {  
-        var messageId = event.notification.data;
-      
-        event.notification.close();  
-      
-        if (event.action === 'like') {  
-          //silentlyLikeItem();  
-        }  
-        else if (event.action === 'view') {  
-          clients.openWindow("https://droom.in/buyer-central/guide-auction");  
-        }  
-       
-      }, false);
+    
     Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
         sub, JSON.stringify(notificationPayload))))
         .then(() => res.status(200).json({ message: 'Newsletter sent successfully.', allSubscriptions: allSubscriptions }))
