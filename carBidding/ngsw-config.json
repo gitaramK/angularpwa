@@ -16,8 +16,8 @@
   {
     "name": "api-freshness",
     "urls": [
-      "https://demo2383658.mockable.io/getCars",
-      "https://demo2383658.mockable.io/updateBid",
+      "/api/getcar",
+      "/api/updateBid",
       "/api/newsletter",
       "/api/notifications"
     ],

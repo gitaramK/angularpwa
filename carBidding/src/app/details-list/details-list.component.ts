@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ShareDataService } from '../share-data.service';
-import { RestApiService } from '../rest-api.service';
 import { OnlineOfflineService } from '../online-offline.service';
+import { RestApiService } from '../rest-api.service';
+import { ShareDataService } from '../share-data.service';
 
 
 
@@ -30,7 +30,7 @@ export class DetailsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.sharingService.getData();
-    console.log(this.data);
+    
   }
   public back() {
     this.router.navigate(['']);
@@ -41,13 +41,14 @@ export class DetailsListComponent implements OnInit {
   }
   closePopup(isFromOk:boolean,value:string):void{
     this.showPopup = false;
+    this.data.value=value;
     if(isFromOk){
     
-      this.restApiService.updateBid(value).subscribe((res) => {
-            console.log('res++',res);
+      this.restApiService.updateBid(this.data).subscribe((res) => {
+            
          })
         if(!this.online){
-        localStorage.setItem('bidValue', value);
+        localStorage.setItem('bidValue', this.data);
        }
     }
   }
@@ -57,7 +58,7 @@ export class DetailsListComponent implements OnInit {
       this.online = online;
       
       if (online) {
-        console.log('Connected');
+        
         if(localStorage.getItem('bidValue')){
         this.restApiService.updateBid(localStorage.getItem('bidValue')).subscribe((res) => {
           localStorage.removeItem('bidValue');

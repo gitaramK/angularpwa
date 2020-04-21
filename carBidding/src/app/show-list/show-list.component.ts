@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { RestApiService } from '../rest-api.service';
 import { ShareDataService } from '../share-data.service';
 
@@ -16,12 +16,6 @@ export interface TableElement {
 
 }
 
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   { title: 'fsdfds', image: 'Black', reservePrice: '15000',currentBid:'500',currentBidder:'Amol',auctionId:'12',bidExpiry:'12' },
-//   { title: 'sdfsd', image: 'Black', reservePrice: '16000',currentBid:'600',currentBidder:'Sery Meral',auctionId:'14',bidExpiry:'14' },
-// ];
-
 @Component({
   selector: 'app-show-list',
   templateUrl: './show-list.component.html',
@@ -36,8 +30,7 @@ export class ShowListComponent implements OnInit {
   Data: TableElement[];
   displayedColumns: string[] = ['Title', 'Image', 'Reserve Price', 'Current bid','Current bidder','Auction ID','Bid Expiry'];
   dataSource = new MatTableDataSource<TableElement>(this.Data);
-  //dataSource = ELEMENT_DATA;
-
+  
   animal: string;
   name: string;
 
@@ -48,16 +41,7 @@ export class ShowListComponent implements OnInit {
       this.dataSource = new MatTableDataSource<TableElement>(res);
       
     })
-    // Checks if should display install popup notification:
-
-  // let isIos;
-  // let isInStandaloneMode;
-  // const userAgent = window.navigator.userAgent.toLowerCase();
-  // isIos =  /iphone|ipad|ipod/.test( userAgent );
-  // isInStandaloneMode = 'standalone' in window.navigator;
-
-  //  if(isIos && isInStandaloneMode)
-    
+   
   }
 
   public gotoDetailList(row,event) {

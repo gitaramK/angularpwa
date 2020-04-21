@@ -27,10 +27,10 @@ export class RestApiService {
   constructor(private http: HttpClient) { }
 
   getCarDetails(): Observable<element[]> {
-    return this.http.get<element[]>(this.api)
+    return this.http.get<element[]>('/api/getcar');
   }
-  updateBid(value): Observable<updateElement[]> {
-    return this.http.post<updateElement[]>(this.updateBidAPI,value);
+  updateBid(data): Observable<updateElement[]> {
+    return this.http.post<updateElement[]>(this.updateBidAPI,data);
   }
 
   addPushSubscriber(sub:any) {

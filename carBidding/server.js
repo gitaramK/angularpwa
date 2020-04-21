@@ -1,29 +1,21 @@
-//Install express server
 const express = require('express');
 const path = require('path');
-const webpush = require('web-push');
+const webpush = require('web-push');//Requires for push notifications
 const bodyParser = require('body-parser');
+const fs = require('fs');
+
 const vapidKeys = {
     "publicKey": "BLzVD3cpcRqBYbujq25JR_J5EbHkL_7PM_BHN7AlqOomchns1Oq5gyO0875hCnNw1fQ-cLSXoGZQqFoz9WtOMZs",
     "privateKey": "a0iA5t43rc4w_ebbStmUJvnElStQ6Ke3sUvqHXYf6V0"
 }
 
-
 const app = express();
 
-// Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/carBidding'));
-
-// app.get('/*', function (req, res) {
-
-//     res.sendFile(path.join(__dirname + '/dist/carBidding/index.html'));
-// });
 
 app.use(bodyParser.json());
 
-// Start the app by listening on the default Heroku port
-// app.listen(process.env.PORT || 8080);
-
+/****Push notifications public and private keys */
 webpush.setVapidDetails(
     'mailto:gitaram.kanawade@fulcrumdigital.com',
     vapidKeys.publicKey,
@@ -31,24 +23,20 @@ webpush.setVapidDetails(
 );
 
 
-/***** */
+/****APIS for notifications* */
 app.route('/api/newsletter').post(sendNewsletter);
 app.route('/api/notifications').post(addPushSubscriber);
-
-
+app.route('/api/getcar').post(getCars);
+app.route('/api/updateBid').post(updateBid);
 
 const allSubscriptions = [];
 
-
-
+/*****Broadcast the notification to multiple subscriber */
 function sendNewsletter(req, res) {
-
-    console.log('Total subscriptions', allSubscriptions.length);
-
     const notificationPayload = {
         "notification": {
             "title": "Tata ",
-            "body": "Tata Nexon Electric launch!",
+            "body": "Tata Nexon EV is an electric 5 seater SUV car launched at a base price of Rs. 13.99 lakh in January 2020 by Tata in India. Nexon EV also comes with automatic transmission.",
             "icon": "assets/TaTa_N.jpg",
             "vibrate": [100, 50, 100],
             "data": {
@@ -64,16 +52,14 @@ function sendNewsletter(req, res) {
 
     Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
         sub, JSON.stringify(notificationPayload))))
-        .then(() => res.status(200).json({ message: 'Newsletter sent successfully.',allSubscriptions:allSubscriptions }))
+        .then(() => res.status(200).json({ message: 'Newsletter sent successfully.', allSubscriptions: allSubscriptions }))
         .catch(err => {
             console.error("Error sending notification, reason: ", err);
             res.sendStatus(500);
         });
 }
-
+/*****Add subscriber and send welcome notifications */
 function addWelcomePushSubscriber(sub) {
- 
-
     const notificationPayload = {
         "notification": {
             "title": "Nice Job! Notifications are on now for CarBidding ",
@@ -83,7 +69,6 @@ function addWelcomePushSubscriber(sub) {
                 "dateOfArrival": Date.now(),
                 "primaryKey": 1
             },
-           
         }
     };
 
@@ -92,20 +77,56 @@ function addWelcomePushSubscriber(sub) {
         .then(() => console.log('sent'))
         .catch(err => {
             console.error("Error sending notification, reason: ", err);
-           
+
         });
 }
 
+/*****Add subscriber when it allows notifications */
 function addPushSubscriber(req, res) {
-
     const sub = req.body;
-   
-    allSubscriptions.push(sub);    
-    addWelcomePushSubscriber(sub);  
-    res.status(200).json({ message: "Subscription added successfully.",allSubscriptions:allSubscriptions });
+    allSubscriptions.push(sub);
+    addWelcomePushSubscriber(sub);
+    res.status(200).json({ message: "Subscription added successfully.", allSubscriptions: allSubscriptions });
 }
 
-app.set('port', process.env.PORT || 8080);
+/*****Get car Details*/
+function getCars(req, res) {
+    var obj;
+    fs.readFile('car.json', 'utf8', function (err, data) {
+      if (err) throw err;
+      obj = JSON.parse(data);
+      res.status(200).json(obj);
+    });
+    
+}
+
+/*****Update Bid Valie */
+function updateBid(req, res) {
+    var obj;
+    const request = req.body;
+    fs.readFile('car.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        obj = JSON.parse(data);
+        obj.forEach((x,index) => {
+            // If the bookID is the one we are looking for, set it as null
+            if (x.carId === request.carId) {
+                obj[index].updatedBid = request.updatedBid;
+                fs.writeFile('car.json',JSON.stringify(obj), function (err, data) {
+                    if (err) throw err;
+                   // obj = JSON.parse(data);
+                    res.status(200).json({message: "Updated Successfully",json:obj});
+                  });
+                 
+            }
+
+          });
+      
+    });
+}
+
+
+
+app.set('port', process.env.PORT || 8081);
 const server = app.listen(app.get('port'), () => {
     console.log(`Express running → PORT ${server.address().port}`);
-  });
+});

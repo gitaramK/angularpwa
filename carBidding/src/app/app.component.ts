@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { OnlineOfflineService } from './online-offline.service';
 import { SwPush } from '@angular/service-worker';
+import { OnlineOfflineService } from './online-offline.service';
 import { RestApiService } from './rest-api.service';
 
 
@@ -10,9 +10,9 @@ import { RestApiService } from './rest-api.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Car Details';
+  
   showSnackBar:Boolean=false;
-  showSnackBaGreen:Boolean=false;
+  
   readonly VAPID_PUBLIC_KEY = "BLzVD3cpcRqBYbujq25JR_J5EbHkL_7PM_BHN7AlqOomchns1Oq5gyO0875hCnNw1fQ-cLSXoGZQqFoz9WtOMZs";
 
   isEnabled = this.swPush.isEnabled;
@@ -20,7 +20,7 @@ export class AppComponent {
     this.registerToEvents(onlineOfflineService);
     this.subscribeToNotifications();
   }
-
+    /*****Subscribe to notifications once once allow */
   subscribeToNotifications() {
 
     this.swPush.requestSubscription({
@@ -32,12 +32,12 @@ export class AppComponent {
      .catch(err => console.error("Could not subscribe to notifications", err));
 }
  
+/*****Check user online offline status */
   private registerToEvents(onlineOfflineService: OnlineOfflineService) {
     onlineOfflineService.connectionChanged.subscribe(online => {
       if (online) {
         console.log('Connected');
-        //this.sendItemsFromIndexedDb();
-  
+        
       } else {
         this.showSnackBar = true;
         setTimeout(() => {
@@ -47,7 +47,7 @@ export class AppComponent {
       }
     });
   }
-
+  /****Send Notification broadcast */
   sendNotification(){
     this._restAPI.send().subscribe();
   }
