@@ -21,16 +21,14 @@ export interface updateElement {
   providedIn: 'root'
 })
 export class RestApiService {
-  api: string = "https://demo2383658.mockable.io/getCars";
-  updateBidAPI: string = "https://demo2383658.mockable.io/updateBid";
-
+  
   constructor(private http: HttpClient) { }
 
   getCarDetails(): Observable<element[]> {
     return this.http.get<element[]>('/api/getcar');
   }
   updateBid(data): Observable<updateElement[]> {
-    return this.http.post<updateElement[]>(this.updateBidAPI,data);
+    return this.http.post<updateElement[]>('/api/updateBid',data);
   }
 
   addPushSubscriber(sub:any) {
