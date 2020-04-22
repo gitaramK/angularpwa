@@ -28,7 +28,7 @@ export class ShowListComponent implements OnInit {
   ngOnInit(): void {
   }
   Data: TableElement[];
-  displayedColumns: string[] = ['Title', 'Image', 'Reserve Price', 'Current bid','Current bidder'];
+  displayedColumns: string[] = ['Title', 'Image', 'Current bid','Current bidder'];
   dataSource = new MatTableDataSource<TableElement>(this.Data);
   
   animal: string;
