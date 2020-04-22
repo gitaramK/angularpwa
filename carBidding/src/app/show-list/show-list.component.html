@@ -32,7 +32,7 @@
   
     <ng-container matColumnDef="Current bid">
       <th mat-header-cell *matHeaderCellDef>  Current bid</th>
-      <td mat-cell *matCellDef="let element" > {{element.updatedBid}}  </td>
+      <td mat-cell *matCellDef="let element" > {{element.updatedBid| currency:'AED'}}  </td>
     
     </ng-container>
     <ng-container matColumnDef="Current bidder">
