@@ -50,8 +50,8 @@ function sendNewsletter(req, res) {
                 "primaryKey": 1
             },
             "actions": [
-            {action: 'like', title: '👍Like'},  
-            {action: 'view', title: 'visit'}]
+            // {action: 'like', title: '👍Like'},  
+            {action: 'view', title: 'VIEW'}]
         }
     };
     
