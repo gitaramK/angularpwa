@@ -15,6 +15,7 @@ table,.homeButton{
 }
 .mat-column-Current-bid{
   font-size: 12px;
+  text-align: center;
 }
 .classImage{
     height: 69px;
