@@ -13,6 +13,9 @@ table,.homeButton{
   cursor:pointer;
   background-color:#f5f5f5;
 }
+.mat-column-Current-bid{
+  font-size: 12px;
+}
 .classImage{
     height: 69px;
     width: 69px;
