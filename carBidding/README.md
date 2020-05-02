@@ -1,10 +1,15 @@
 # CarBidding
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
-Includes Functionality like 
+Includes Functionality like.
+
 -Add to Home screen button 
+
 -Push notification when subscribes to notification
+
 -Offline application working
+
+-Application network check Online/Offline
 
 
 ## Development server
