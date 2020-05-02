@@ -1,10 +1,16 @@
 # CarBidding
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+Includes Functionality like 
+-Add to Home screen button 
+-Push notification when subscribes to notification
+-Offline application working
+
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+See [Demo](https://angular9-pwa-demo.herokuapp.com/)
 
 ## Code scaffolding
 
